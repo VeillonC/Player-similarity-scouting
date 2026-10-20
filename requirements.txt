@@ -1,0 +1,7 @@
+streamlit
+pandas
+numpy
+plotly
+statsbombpy
+soccerdata
+scikit-learn

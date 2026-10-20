@@ -1,0 +1,7 @@
+venv/
+.venv/
+__pycache__/
+*.pyc
+data/events_wc2022_euro2024.parquet
+downloaded_files/
+.ipynb_checkpoints/
