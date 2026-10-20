@@ -38,13 +38,16 @@ h1, h2, h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; lett
 
 [data-testid="column"] { padding: 0.45rem; }
 
-.stTabs [data-baseweb="tab-list"] { gap: 0.6rem; border-bottom: 3px solid #0F1E3D; padding-bottom: 0; }
+.stTabs [data-baseweb="tab-list"] { gap: 0.6rem !important; border-bottom: 3px solid #0F1E3D; padding-bottom: 0; }
 .stTabs [data-baseweb="tab"] {
-    height: auto;
+    height: auto !important;
+    min-height: 0 !important;
     color: #5B6878; font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.03em;
-    padding: 0.95rem 1.8rem; margin-bottom: -3px; border-radius: 6px 6px 0 0;
+    padding: 0.95rem 1.8rem !important;
+    margin-bottom: -3px; border-radius: 6px 6px 0 0;
     transition: background-color 0.15s ease, color 0.15s ease;
 }
+.stTabs [data-baseweb="tab"] p { padding: 0 !important; margin: 0 !important; }
 .stTabs [data-baseweb="tab"]:hover { color: #0F1E3D; }
 .stTabs [aria-selected="true"] { color: #FFFFFF; background-color: #0F1E3D; }
 
