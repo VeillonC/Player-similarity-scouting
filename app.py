@@ -38,18 +38,47 @@ h1, h2, h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; lett
 
 [data-testid="column"] { padding: 0.45rem; }
 
-.stTabs [data-baseweb="tab-list"] { gap: 0.6rem !important; border-bottom: 3px solid #0F1E3D; padding-bottom: 0; }
+.stTabs [data-baseweb="tab-list"],
+.stTabs [role="tablist"] {
+    gap: 0.6rem !important;
+    border-bottom: 3px solid #0F1E3D !important;
+    padding-bottom: 0 !important;
+}
+.stTabs [data-baseweb="tab-highlight"] { display: none !important; }
+.stTabs button[role="tab"],
+.stTabs [data-testid="stTab"],
 .stTabs [data-baseweb="tab"] {
+    box-sizing: border-box !important;
     height: auto !important;
     min-height: 0 !important;
-    color: #5B6878; font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.03em;
+    color: #5B6878 !important;
+    font-weight: 700 !important;
+    font-size: 1.05rem !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.03em !important;
     padding: 0.95rem 1.8rem !important;
-    margin-bottom: -3px; border-radius: 6px 6px 0 0;
-    transition: background-color 0.15s ease, color 0.15s ease;
+    margin: 0 0 -3px 0 !important;
+    border-radius: 6px 6px 0 0 !important;
+    background-color: transparent !important;
+    transition: background-color 0.15s ease, color 0.15s ease !important;
 }
+.stTabs button[role="tab"] p,
+.stTabs [data-testid="stTab"] p,
 .stTabs [data-baseweb="tab"] p { padding: 0 !important; margin: 0 !important; }
-.stTabs [data-baseweb="tab"]:hover { color: #0F1E3D; }
-.stTabs [aria-selected="true"] { color: #FFFFFF; background-color: #0F1E3D; }
+.stTabs button[role="tab"]:hover,
+.stTabs [data-testid="stTab"]:hover,
+.stTabs [data-baseweb="tab"]:hover {
+    color: #0F1E3D !important;
+    background-color: #E9ECF2 !important;
+}
+.stTabs button[aria-selected="true"],
+.stTabs [data-testid="stTab"][aria-selected="true"],
+.stTabs [aria-selected="true"] {
+    color: #FFFFFF !important;
+    background-color: #0F1E3D !important;
+}
+.stTabs button[aria-selected="true"]:hover,
+.stTabs [aria-selected="true"]:hover { background-color: #0F1E3D !important; color: #FFFFFF !important; }
 
 [data-testid="stDataFrame"] { border: 1px solid #D7DCE4; border-radius: 4px; font-size: 0.95rem; }
 
