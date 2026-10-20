@@ -11,7 +11,7 @@ PLOTLY_TEMPLATE = "plotly_white"
 ACCENT_1 = "#1455C0"
 ACCENT_2 = "#E8502A"
 ACCENT_SEQUENCE = ["#1455C0", "#E8502A", "#00A86B", "#D81B60", "#8E6FC9"]
-CLUSTER_COLORS = {0: "#1455C0", 1:"#00A86B", 2: "#FF7A00", 3: "#D81B60"}
+CLUSTER_COLORS = {0: "#1455C0", 1: "#FF7A00", 2: "#00A86B", 3: "#D81B60"}
 BG = "#F3F5F8"
 TEXT = "#0F1E3D"
 MUTED = "#5B6878"
@@ -38,11 +38,14 @@ h1, h2, h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; lett
 
 [data-testid="column"] { padding: 0.45rem; }
 
-.stTabs [data-baseweb="tab-list"] { gap: 0.6rem; border-bottom: 3px solid #0F1E3D; }
+.stTabs [data-baseweb="tab-list"] { gap: 0.6rem; border-bottom: 3px solid #0F1E3D; padding-bottom: 0; }
 .stTabs [data-baseweb="tab"] {
+    height: auto;
     color: #5B6878; font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.03em;
-    padding: 0.7rem 1.3rem; border-radius: 6px 6px 0 0;
+    padding: 0.95rem 1.8rem; margin-bottom: -3px; border-radius: 6px 6px 0 0;
+    transition: background-color 0.15s ease, color 0.15s ease;
 }
+.stTabs [data-baseweb="tab"]:hover { color: #0F1E3D; }
 .stTabs [aria-selected="true"] { color: #FFFFFF; background-color: #0F1E3D; }
 
 [data-testid="stDataFrame"] { border: 1px solid #D7DCE4; border-radius: 4px; font-size: 0.95rem; }
@@ -406,25 +409,17 @@ with tab_compare:
         compare_rows = [df[df["player_name"] == p].iloc[0] for p in selected_compare]
         compare_colors = {p: ACCENT_SEQUENCE[i % len(ACCENT_SEQUENCE)] for i, p in enumerate(selected_compare)}
 
-        banner_cards = ""
-        for row in compare_rows:
-            color = compare_colors[row["player_name"]]
-            banner_cards += f"""
-            <div style="min-width:230px; flex:0 0 auto; border-top:4px solid {color}; padding-top:0.6rem;">
-                <h3 style="margin-bottom:0.4rem; font-size:1.3rem; white-space:nowrap;">{row['player_name']}</h3>
-                <div>
-                    <span class="player-tag">{row['position']}</span><br style="line-height:2.2;">
+        banner_cols = st.columns(len(compare_rows), gap="large")
+        for col, row in zip(banner_cols, compare_rows):
+            with col:
+                st.markdown(f"""
+                <div style="border-top:4px solid {compare_colors[row['player_name']]}; padding-top:0.6rem; margin-bottom:0.8rem;">
+                    <h3 style="margin-bottom: 0.3rem;">{row['player_name']}</h3>
+                    <span class="player-tag">{row['position']}</span>
                     <span class="player-tag">{row['team']}</span>
                     {age_tag(row)}
                 </div>
-            </div>
-            """
-        st.markdown(clean_html(f"""
-        <div style="display:flex; gap:1.6rem; overflow-x:auto; padding-bottom:0.8rem; margin-bottom:1rem;">
-            {banner_cards}
-        </div>
-        """), unsafe_allow_html=True)
-
+                """, unsafe_allow_html=True)
 
         players_to_plot = df[df["player_name"].isin(selected_compare)].drop_duplicates(subset="player_name")
         st.plotly_chart(plot_radar(players_to_plot, order=selected_compare), use_container_width=True)
@@ -456,8 +451,7 @@ with tab_compare:
             body_rows += f'<tr><td style="color:#5B6878; text-align:left; font-family:Inter; font-weight:500;">{label}</td>{value_cells}</tr>'
 
         st.markdown(clean_html(f"""
-        <div style="overflow-x:auto;">
-        <table class="compare-table" style="min-width:{200 + len(selected_compare) * 160}px;">
+        <table class="compare-table">
             <thead>
                 <tr><th style="text-align:left; color:#5B6878;">Metric</th>{header_cells}</tr>
             </thead>
@@ -465,7 +459,6 @@ with tab_compare:
                 {body_rows}
             </tbody>
         </table>
-        </div>
         """), unsafe_allow_html=True)
 
 with tab_clusters:
@@ -546,7 +539,8 @@ No contract or market value data (Transfermarkt, the only reliable source for th
 
 st.markdown("""
 <div class="app-footer">
-    Built by <a href="https://www.linkedin.com/in/veilloncamille/" target="_blank" style="color:#0F1E3D; font-weight:700; text-decoration:none; border-bottom:1px solid #1455C0;">Camille Veillon</a> &middot; Polytech Nice Sophia, Applied Mathematics & Data Science<br>    Data: StatsBomb Open Data, used under StatsBomb's open data license (non-commercial use). Player age: Wikidata.<br>
+    Built by <b>Camille Veillon</b> &middot; Polytech Nice Sophia, Applied Mathematics & Data Science<br>
+    Data: StatsBomb Open Data, used under StatsBomb's open data license (non-commercial use). Player age: Wikidata.<br>
     This is an independent, non-commercial student portfolio project. Not affiliated with or endorsed by StatsBomb, FIFA, UEFA, or any club or federation mentioned.
 </div>
 """, unsafe_allow_html=True)

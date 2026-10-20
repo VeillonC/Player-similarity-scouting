@@ -1,5 +1,7 @@
 # Player Similarity Scouting
 
+[![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://camille-veillon-player-similarity.streamlit.app/)
+
 A data-driven scouting tool that finds players with a similar playing style, built on StatsBomb Open Data event data (World Cup 2022 and Euro 2024).
 
 ## What it does
@@ -10,7 +12,7 @@ A data-driven scouting tool that finds players with a similar playing style, bui
 - Flags disciplinary risk (cards, fouls) as a separate indicator
 
 ## Live app
-[link coming soon]
+**Live app:** [camille-veillon-player-similarity.streamlit.app](https://camille-veillon-player-similarity.streamlit.app/)
 
 ## Stack
 Python, pandas, scikit-learn, Plotly, Streamlit. Data pulled via `statsbombpy`.
