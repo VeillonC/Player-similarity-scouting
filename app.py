@@ -20,23 +20,23 @@ st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap');
 
-html, body, [class*="css"] { font-family: 'Inter', sans-serif; font-size: 18px; color: #0F1E3D; }
+html, body, [class*="css"] { font-family: 'Inter', sans-serif; font-size: 15.5px; color: #0F1E3D; }
 h1, h2, h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; letter-spacing: 0.01em; color: #0F1E3D; }
 
-.block-container { padding-top: 2rem; padding-left: 3rem; padding-right: 3rem; padding-bottom: 1rem; max-width: 100%; }
+.block-container { padding-top: 1.2rem; padding-left: 2.4rem; padding-right: 2.4rem; padding-bottom: 1rem; max-width: 100%; }
 
 [data-testid="stMetric"] {
     background-color: #FFFFFF;
-    border-top: 5px solid #1455C0;
+    border-top: 4px solid #1455C0;
     border-radius: 4px;
-    padding: 1rem 1.1rem;
+    padding: 0.8rem 0.9rem;
 }
 [data-testid="column"]:nth-of-type(even) [data-testid="stMetric"] { border-top-color: #E8502A; }
 
-[data-testid="stMetricLabel"] { color: #5B6878; white-space: normal; overflow: visible; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.02em; }
-[data-testid="stMetricValue"] { color: #0F1E3D; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 2rem; }
+[data-testid="stMetricLabel"] { color: #5B6878; white-space: normal; overflow: visible; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.02em; }
+[data-testid="stMetricValue"] { color: #0F1E3D; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.6rem; }
 
-[data-testid="column"] { padding: 0.45rem; }
+[data-testid="column"] { padding: 0.35rem; }
 
 .stTabs [data-baseweb="tab-list"],
 .stTabs [role="tablist"] {
@@ -53,10 +53,10 @@ h1, h2, h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; lett
     min-height: 0 !important;
     color: #5B6878 !important;
     font-weight: 700 !important;
-    font-size: 1.05rem !important;
+    font-size: 0.88rem !important;
     text-transform: uppercase !important;
     letter-spacing: 0.03em !important;
-    padding: 0.95rem 1.8rem !important;
+    padding: 0.7rem 1.3rem !important;
     margin: 0 0 -3px 0 !important;
     border-radius: 6px 6px 0 0 !important;
     background-color: transparent !important;
@@ -95,28 +95,28 @@ h1, h2, h3 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; lett
     background-color: #FFFFFF;
     border: 1px solid #D7DCE4;
     border-radius: 6px;
-    padding: 1.2rem 1.5rem;
-    margin-bottom: 1.8rem;
+    padding: 1rem 1.3rem;
+    margin-bottom: 1.4rem;
 }
-.intro-step { color: #0F1E3D; margin-bottom: 0.35rem; }
+.intro-step { color: #0F1E3D; margin-bottom: 0.3rem; }
 .intro-step b { color: #E8502A; }
 
-.section-title { margin-top: 2.1rem; margin-bottom: 0.6rem; color: #0F1E3D; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.35rem; text-transform: uppercase; letter-spacing: 0.02em; }
-.section-subtitle { color: #5B6878; margin-bottom: 1rem; font-size: 0.95rem; }
-.stat-group-label { font-size: 0.88rem; font-weight: 600; color: #5B6878; text-transform: uppercase; letter-spacing: 0.03em; margin: 1.1rem 0 0.6rem; }
+.section-title { margin-top: 1.6rem; margin-bottom: 0.5rem; color: #0F1E3D; font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 1.15rem; text-transform: uppercase; letter-spacing: 0.02em; }
+.section-subtitle { color: #5B6878; margin-bottom: 0.8rem; font-size: 0.82rem; }
+.stat-group-label { font-size: 0.76rem; font-weight: 600; color: #5B6878; text-transform: uppercase; letter-spacing: 0.03em; margin: 0.9rem 0 0.5rem; }
 
-.player-banner { border-bottom: 1px solid #D7DCE4; padding-bottom: 1.3rem; margin-bottom: 1.6rem; }
-.player-tag { display: inline-block; background-color: #FFFFFF; border: 1px solid #D7DCE4; color: #5B6878; padding: 0.3rem 0.85rem; border-radius: 16px; font-size: 0.82rem; margin-right: 0.5rem; }
-.player-tag-accent { display: inline-block; background-color: #E8502A; color: #FFFFFF; font-weight: 600; padding: 0.3rem 0.85rem; border-radius: 16px; font-size: 0.82rem; margin-right: 0.5rem; }
+.player-banner { border-bottom: 1px solid #D7DCE4; padding-bottom: 1rem; margin-bottom: 1.2rem; }
+.player-tag { display: inline-block; background-color: #FFFFFF; border: 1px solid #D7DCE4; color: #5B6878; padding: 0.25rem 0.7rem; border-radius: 16px; font-size: 0.72rem; margin-right: 0.5rem; }
+.player-tag-accent { display: inline-block; background-color: #E8502A; color: #FFFFFF; font-weight: 600; padding: 0.25rem 0.7rem; border-radius: 16px; font-size: 0.72rem; margin-right: 0.5rem; }
 
-.compare-table { width: 100%; border-collapse: collapse; margin-top: 0.5rem; }
-.compare-table th { padding: 1rem; font-size: 1rem; border-bottom: 3px solid #0F1E3D; }
-.compare-table td { padding: 1rem; text-align: center; border-bottom: 1px solid #E3E7ED; }
+.compare-table { width: 100%; border-collapse: collapse; margin-top: 0.4rem; }
+.compare-table th { padding: 0.75rem; font-size: 0.85rem; border-bottom: 3px solid #0F1E3D; }
+.compare-table td { padding: 0.75rem; text-align: center; border-bottom: 1px solid #E3E7ED; }
 .compare-table tr:nth-child(even) td { background-color: #FFFFFF; }
 
 .app-footer {
-    border-top: 1px solid #D7DCE4; margin-top: 3rem; padding-top: 1.2rem;
-    color: #5B6878; font-size: 0.85rem; text-align: center; line-height: 1.6;
+    border-top: 1px solid #D7DCE4; margin-top: 2.2rem; padding-top: 1rem;
+    color: #5B6878; font-size: 0.75rem; text-align: center; line-height: 1.5;
 }
 .app-footer b { color: #0F1E3D; }
 </style>
@@ -256,8 +256,8 @@ def render_player_banner(row):
 
 st.markdown("""
 <div class="app-header">
-    <h1 style="margin-bottom: 0.3rem; font-size: 3rem;">Player Similarity Scouting</h1>
-    <p style="color: #5B6878; margin: 0; font-size: 1.05rem;">World Cup 2022 and Euro 2024 &middot; StatsBomb Open Data</p>
+    <h1 style="margin-bottom: 0.25rem; font-size: 2.2rem;">Player Similarity Scouting</h1>
+    <p style="color: #5B6878; margin: 0; font-size: 0.9rem;">World Cup 2022 and Euro 2024 &middot; StatsBomb Open Data</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -392,8 +392,8 @@ with tab_search:
                             padding:0.75rem 1.1rem; margin-bottom:0.6rem; border-radius:4px;
                             display:flex; justify-content:space-between; align-items:center;">
                     <span style="color:#0F1E3D;">{label}</span>
-                    <span style="color:{color}; font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:1.15rem;">
-                        {val:.0f}<span style="font-size:0.75rem; color:#5B6878;"> pct</span>
+                    <span style="color:{color}; font-family:'Barlow Condensed', sans-serif; font-weight:700; font-size:0.95rem;">
+                        {val:.0f}<span style="font-size:0.65rem; color:#5B6878;"> pct</span>
                     </span>
                 </div>
                 """
@@ -478,7 +478,7 @@ with tab_compare:
                 weight = 700 if value == best_value else 400
                 value_cells += (
                     f'<td style="font-family:\'Barlow Condensed\', sans-serif; font-weight:{weight}; '
-                    f'font-size:1.2rem; color:{color};">{fmt}</td>'
+                    f'font-size:1rem; color:{color};">{fmt}</td>'
                 )
             body_rows += f'<tr><td style="color:#5B6878; text-align:left; font-family:Inter; font-weight:500;">{label}</td>{value_cells}</tr>'
 
