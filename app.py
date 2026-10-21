@@ -184,6 +184,7 @@ h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-
     /* Plotly charts: let them scroll horizontally rather than squeeze their own text unreadably small */
     [data-testid="stPlotlyChart"] { overflow-x: auto; }
     .js-plotly-plot .plotly .legend text { font-size: 10px !important; }
+    .js-plotly-plot .plotly .ytick text, .js-plotly-plot .plotly .xtick text { font-size: 9px !important; }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -664,11 +665,17 @@ with tab_rank:
 
     fig_bar = px.bar(
         ranking, x=selected_metric, y="player_name", orientation="h",
-        color="position", height=max(400, top_n * 28),
+        color="position", height=max(400, top_n * 32),
         template=PLOTLY_TEMPLATE, color_discrete_sequence=list(CLUSTER_COLORS.values()) + ACCENT_SEQUENCE,
     )
     fig_bar.update_layout(
-        yaxis=dict(autorange="reversed"), paper_bgcolor=BG, plot_bgcolor="#FFFFFF", font=dict(color=TEXT),
+        # automargin stops player names from being clipped on a narrow screen, and moving the legend
+        # below the chart (instead of Plotly's default spot on the right) frees up the width for the bars
+        yaxis=dict(autorange="reversed", automargin=True, title=None),
+        xaxis=dict(title=ranking_label(selected_metric)),
+        paper_bgcolor=BG, plot_bgcolor="#FFFFFF", font=dict(color=TEXT),
+        legend=dict(orientation="h", yanchor="bottom", y=-0.12, title_text="Position"),
+        margin=dict(l=10, r=10),
     )
     st.plotly_chart(fig_bar, use_container_width=True)
 
