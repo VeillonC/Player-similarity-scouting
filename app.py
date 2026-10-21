@@ -170,13 +170,20 @@ h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; letter-
     .app-header::before, .app-header::after { display: none; }
     [data-testid="stHorizontalBlock"] { flex-direction: column !important; }
     [data-testid="stHorizontalBlock"] [data-testid="column"] { width: 100% !important; flex: 1 1 100% !important; }
-    .stTabs [role="tablist"] { overflow-x: auto !important; flex-wrap: nowrap !important; }
+    .stTabs [data-baseweb="tab-list"], .stTabs [role="tablist"] {
+        overflow-x: auto !important; flex-wrap: nowrap !important; gap: 0.3rem !important;
+        -webkit-overflow-scrolling: touch; scrollbar-width: thin;
+    }
     .stTabs button[role="tab"], .stTabs [data-testid="stTab"], .stTabs [data-baseweb="tab"] {
-        padding: 0.55rem 0.9rem !important; font-size: 0.75rem !important; white-space: nowrap;
+        padding: 0.45rem 0.7rem !important; font-size: 0.68rem !important; letter-spacing: 0.01em !important;
+        white-space: nowrap;
     }
     .compare-table { display: block; overflow-x: auto; white-space: nowrap; }
-    [data-testid="stDataFrame"] { font-size: 0.8rem; }
+    [data-testid="stDataFrame"] { font-size: 0.72rem; }
     .player-banner { flex-wrap: wrap; }
+    /* Plotly charts: let them scroll horizontally rather than squeeze their own text unreadably small */
+    [data-testid="stPlotlyChart"] { overflow-x: auto; }
+    .js-plotly-plot .plotly .legend text { font-size: 10px !important; }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -323,10 +330,11 @@ def plot_radar(players_to_plot, cols=None, order=None):
         template=PLOTLY_TEMPLATE, paper_bgcolor=BG, plot_bgcolor=BG,
         polar=dict(
             bgcolor="#FFFFFF",
-            radialaxis=dict(visible=True, range=[0, 1], gridcolor="#EAE7DD"),
-            angularaxis=dict(gridcolor="#EAE7DD"),
+            radialaxis=dict(visible=True, range=[0, 1], gridcolor="#EAE7DD", tickfont=dict(size=10)),
+            # smaller axis labels so they don't overlap once the chart is squeezed into a narrow phone screen
+            angularaxis=dict(gridcolor="#EAE7DD", tickfont=dict(size=11)),
         ),
-        showlegend=True, height=650, margin=dict(t=40, b=30),
+        showlegend=True, height=580, margin=dict(t=40, b=30, l=60, r=60),
         legend=dict(orientation="h", yanchor="bottom", y=-0.15),
         font=dict(color=TEXT),
     )
@@ -506,8 +514,10 @@ with tab_search:
         fig_pct.update_layout(
             template=PLOTLY_TEMPLATE, paper_bgcolor=BG, plot_bgcolor="#FFFFFF",
             xaxis=dict(range=[0, 100], title="Percentile", gridcolor="#EAE7DD"),
-            yaxis=dict(gridcolor="#EAE7DD"),
-            height=420, margin=dict(t=20, b=20),
+            # automargin keeps the metric labels on the left from getting clipped on a narrow screen,
+            # and scaling height with the bar count stops them from getting cramped on top of each other
+            yaxis=dict(gridcolor="#EAE7DD", automargin=True),
+            height=max(320, len(pct_values) * 34), margin=dict(t=20, b=20, l=10),
             font=dict(color=TEXT),
         )
         st.plotly_chart(fig_pct, use_container_width=True)
