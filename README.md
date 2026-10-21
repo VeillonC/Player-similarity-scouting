@@ -5,9 +5,9 @@
 A data-driven scouting tool that finds players with a similar playing style, built on StatsBomb Open Data event data (World Cup 2022 and Euro 2024).
 
 ## What it does
-- Recomputes xG, progressive passes and progressive carries directly from raw event coordinates
+- Builds player totals from raw event data: xG aggregated directly from StatsBomb's per-shot values, progressive passes and carries computed from scratch using each event's coordinates (a metric StatsBomb doesn't provide natively)
 - Groups 130 players into playing-style clusters (KMeans on a PCA-reduced feature space), independent of their listed position
-- Finds the closest statistical profiles to any given player (cosine similarity)
+- Finds the closest statistical profiles to any given player (cosine similarity on that same PCA-reduced profile)
 - Compares players side by side, with a percentile breakdown against their position group
 - Flags disciplinary risk (cards, fouls) as a separate indicator
 
@@ -18,10 +18,10 @@ A data-driven scouting tool that finds players with a similar playing style, bui
 Python, pandas, scikit-learn, Plotly, Streamlit. Data pulled via `statsbombpy`.
 
 ## Run locally
-\`\`\`bash
+```bash
 pip install -r requirements.txt
 streamlit run app.py
-\`\`\`
+```
 
 ## Data source
 [StatsBomb Open Data](https://github.com/statsbomb/open-data), used under StatsBomb's open data license (non-commercial use).
