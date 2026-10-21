@@ -663,19 +663,21 @@ with tab_rank:
         selected_metric, ascending=False
     ).head(top_n)
 
-    fig_bar = px.bar(
-        ranking, x=selected_metric, y="player_name", orientation="h",
-        color="position", height=max(400, top_n * 32),
-        template=PLOTLY_TEMPLATE, color_discrete_sequence=list(CLUSTER_COLORS.values()) + ACCENT_SEQUENCE,
-    )
+    # single color instead of one per position: a 6-entry color legend ate too much space and
+    # started overlapping the axis title on a narrow screen, position still shows up on hover
+    fig_bar = go.Figure(go.Bar(
+        x=ranking[selected_metric], y=ranking["player_name"], orientation="h",
+        marker_color=ACCENT_1,
+        customdata=ranking[["position", "team"]],
+        hovertemplate="<b>%{y}</b><br>%{customdata[0]}, %{customdata[1]}<br>" + ranking_label(selected_metric) + ": %{x}<extra></extra>",
+    ))
     fig_bar.update_layout(
-        # automargin stops player names from being clipped on a narrow screen, and moving the legend
-        # below the chart (instead of Plotly's default spot on the right) frees up the width for the bars
+        template=PLOTLY_TEMPLATE, height=max(400, top_n * 32),
+        # automargin stops player names from being clipped on a narrow screen
         yaxis=dict(autorange="reversed", automargin=True, title=None),
         xaxis=dict(title=ranking_label(selected_metric)),
         paper_bgcolor=BG, plot_bgcolor="#FFFFFF", font=dict(color=TEXT),
-        legend=dict(orientation="h", yanchor="bottom", y=-0.12, title_text="Position"),
-        margin=dict(l=10, r=10),
+        margin=dict(l=10, r=10, b=40),
     )
     st.plotly_chart(fig_bar, use_container_width=True)
 
